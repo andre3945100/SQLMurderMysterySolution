@@ -1,0 +1,27 @@
+--Jeremy Bower: 67318
+--Leader: Unknown
+--Interview description: I was hired by a woman with a lot of money. I don't know her name but I know she's around 5'5" (65") or 5'7" (67"). 
+She has red hair and she drives a Tesla Model S. I know that she attended the SQL Symphony Concert 3 times in December 2017.
+
+--Part1
+SELECT Person.id, event_name, date,COUNT(*) AS EventCount
+FROM person
+JOIN facebook_event_checkin
+	ON person.id = facebook_event_checkin.person_id
+WHERE event_name LIKE 'SQL%' AND date LIKE '201712%'
+GROUP BY Person.id, event_name
+HAVING EventCount = 3
+ORDER BY Person.id DESC
+Result: 99716, 24556
+
+--Part2
+SELECT P.id, height, car_make, car_model
+FROM person AS P
+JOIN drivers_license AS D
+	ON P.license_id = D.id
+WHERE height BETWEEN '65' AND '67' AND car_make = 'Tesla' AND car_model LIKE '%S%'
+ORDER BY height, car_make DESC
+
+Result: 94330, 13064, 99716
+
+99716 both matched, Miranda Priestly is the boss lady
